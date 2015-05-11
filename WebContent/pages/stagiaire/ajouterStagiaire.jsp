@@ -9,7 +9,7 @@
 <body>
 <center>
 	<h3>Ajouter un nouveau stagiaire</h3>
-	<form action="stagserv" method="Post">
+	<form action="/stage" method="Post">
 	<table border=0 width=50%>
 		<tr>
 			<td>Numéro</td>
