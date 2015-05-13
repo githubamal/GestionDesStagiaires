@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>|| Gestion des stagiaires ||</title>
+<title>Insert title here</title>
 </head>
 <body>
-<center>
-	<h3>Ajouter un nouveau stagiaire</h3>
+	<center>
+	<h3>Ajouter un nouveau encadrant</h3>
 	<form action="/stage" method="Post">
 	<table border=0 width=50%>
 		<tr>
@@ -16,36 +16,20 @@
 			<td><input type="text" name="Id"/></td>
 		</tr>
 		<tr>
-			<td>Nom</td>
+			<td>Nom Encadrant</td>
 			<td><input type="text" name="nom"/></td>
 		</tr>
 		<tr>
-			<td>Prénom</td>
+			<td>Prénom Encadrant</td>
 			<td><input type="text" name="prenom"/></td>
-		</tr>
-		<tr>
-			<td>Date de naissance</td>
-			<td><input type="text" name="datnaiss"/></td>
-		</tr>
-		<tr>
-			<td>Lieu de naissance</td>
-			<td><input type="text" name="lieunaiss"/></td>
-		</tr>
-		<tr>
-			<td>Ville</td>
-			<td><input type="text" name="ville"/></td>
-		</tr>
-		<tr>
-			<td>Numéro de téléphone</td>
-			<td><input type="text" name="tele"/></td>
 		</tr>
 		<tr>
 			<td>Email</td>
 			<td><input type="text" name="email"/></td>
 		</tr>
 		<tr>
-			<td>CIN</td>
-			<td><input type="text" name="CIN"/></td>
+			<td>N° téléphone</td>
+			<td><input type="text" name="tele"/></td>
 		</tr>	
 		<tr>
 		<td/>
