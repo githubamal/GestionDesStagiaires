@@ -8,7 +8,7 @@
 </head>
 <body>
 <center>
-	<h3>Bienvenueh3>
+	<h3>Bienvenue</h3>
 	<form action="/stage" method="Post">
 	<table border=0 width=50%>
 		<tr>
