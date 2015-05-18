@@ -10,7 +10,7 @@ public class Stagiaire {
 	Date dateNaissance;
 	String lieuNaissance;
 	String ville;
-	Integer telephone;
+	String telephone;
 	String email;
 	Integer cin;
 
@@ -107,7 +107,7 @@ public class Stagiaire {
 	/**
 	 * @return the telephone
 	 */
-	public Integer getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
@@ -115,7 +115,7 @@ public class Stagiaire {
 	 * @param telephone
 	 *            the telephone to set
 	 */
-	public void setTelephone(Integer telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
