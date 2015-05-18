@@ -9,12 +9,8 @@
 <body>
 	<center>
 	<h3>Ajouter un nouveau encadrant</h3>
-	<form action="/stage" method="Post">
+	<form action="/login" method="Post">
 	<table border=0 width=50%>
-		<tr>
-			<td>Numéro</td>
-			<td><input type="text" name="Id"/></td>
-		</tr>
 		<tr>
 			<td>Nom Encadrant</td>
 			<td><input type="text" name="nom"/></td>
