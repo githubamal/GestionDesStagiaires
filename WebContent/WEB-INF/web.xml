@@ -12,7 +12,7 @@
 
 <servlet-mapping>
    <servlet-name>ServletDispatcher</servlet-name>
-   <url-pattern>/pages</url-pattern>
+   <url-pattern>/app</url-pattern>
 </servlet-mapping>
 
   <servlet>
