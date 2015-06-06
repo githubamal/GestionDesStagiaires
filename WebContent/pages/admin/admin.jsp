@@ -12,7 +12,13 @@
 	<form action="/stage" method="Post">
 	<table border=0 width=50%>
 		<tr>
-			<td>Login</td>
+			<td><button type="button" class="btn btn-default" aria-label="Left Align">
+  <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+</button>
+
+<button type="button" class="btn btn-default btn-lg">
+  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login
+</button></td>
 			<td><input type="text" name="log"/></td>
 		</tr>
 		<tr>
