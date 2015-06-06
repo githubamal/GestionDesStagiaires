@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.colaimo.model.Stage;
 import com.colaimo.util.DBUtil;
 
@@ -67,6 +69,7 @@ public class StageDao {
 							+ "where id_stage=?");
 			// Parameters start with 1
 			preparedStatement.setString(1, stage.getIntituleStage());
+			preparedStatement.setInt(2, stage.getId());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -97,6 +100,34 @@ public class StageDao {
 	}
 
 	/**
+	 * recuperer tout les stages
+	 * @return
+	 */
+	public List<Stage> chercherStage(Stage pStage) {
+		List<Stage> listStage = new ArrayList<Stage>();
+		try {
+
+			String requete = "select * from stage WHERE 1=1 ";
+			if (StringUtils.isNotBlank(pStage.getIntituleStage())) {
+				requete += " AND intitule_stage= '" + pStage.getIntituleStage() + "' ";
+			}
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(requete);
+			while (rs.next()) {
+				Stage stage = new Stage();
+				stage.setId(rs.getInt("id_stage"));
+				stage.setIntituleStage(rs.getString("intitule_stage"));
+				listStage.add(stage);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listStage;
+	}
+	
+	/**
 	 * recuperer stage par Id
 	 * 
 	 * @param stageId
@@ -120,5 +151,8 @@ public class StageDao {
 
 		return stage;
 	}
+
+
+	
 
 }

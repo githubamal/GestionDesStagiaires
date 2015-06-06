@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.colaimo.model.Service;
 import com.colaimo.util.DBUtil;
 
@@ -26,7 +28,7 @@ public class ServiceDao {
 	public void ajouterService(Service service) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into service(nom_srv,srv) values (?, ?)");
+					.prepareStatement("insert into service(nom_srv,chef_srv) values (?, ?)");
 			// Parameters start with 1
 			preparedStatement.setString(1, service.getNom());
 			preparedStatement.setString(2, service.getChef());
@@ -63,11 +65,12 @@ public class ServiceDao {
 	public void updateService(Service service) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("update encadrant set nom_srv=?, chef_srv=?"
+					.prepareStatement("update service set nom_srv=?, chef_srv=?"
 							+ "where id_srv=?");
 			// Parameters start with 1
 			preparedStatement.setString(1, service.getNom());
 			preparedStatement.setString(2, service.getChef());
+			preparedStatement.setInt(3, service.getId());
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -99,6 +102,37 @@ public class ServiceDao {
 		return listService;
 	}
 
+	/**
+	 * Recuperer tout les services
+	 * @return
+	 */
+	public List<Service> chercherService(Service pService) {
+		List<Service> listservice = new ArrayList<Service>();
+		try {
+
+			String requete = "select * from service WHERE 1=1 ";
+			if (StringUtils.isNotBlank(pService.getNom())) {
+				requete += " AND nom_srv= '" + pService.getNom() + "' ";
+			}
+			if (StringUtils.isNotBlank(pService.getChef())) {
+				requete += " AND chef_srv= '" + pService.getChef() + "' ";
+			}
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(requete);
+			while (rs.next()) {
+				Service service = new Service();
+				service.setId(rs.getInt("id_srv"));
+				service.setNom(rs.getString("nom_srv"));
+				service.setChef(rs.getString("chef_srv"));
+				listservice.add(service);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listservice;
+	}
+	
 	/**
 	 * recuperer service par Id
 	 * 

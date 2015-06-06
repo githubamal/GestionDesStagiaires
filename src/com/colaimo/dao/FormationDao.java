@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.colaimo.model.Formation;
 import com.colaimo.util.DBUtil;
 
@@ -44,10 +46,10 @@ public class FormationDao {
 	 * 
 	 * @param encadrantId
 	 */
-	public void deleteEncadrant(int formationId) {
+	public void deleteFormation(int formationId) {
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("delete from formation where id_formation=?");
+					.prepareStatement("delete from formation where id_form=?");
 			// Parameters start with 1
 			preparedStatement.setInt(1, formationId);
 			preparedStatement.executeUpdate();
@@ -92,6 +94,41 @@ public class FormationDao {
 			while (rs.next()) {
 				Formation formation = new Formation();
 				formation.setId(rs.getInt("id_form"));
+				formation.setEtablissement(rs.getString("etablissement"));
+				formation.setDiplome(rs.getString("diplome"));
+				formation.setFiliere(rs.getString("filiere"));
+				listFormation.add(formation);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listFormation;
+	}
+	
+	/**
+	 * Recuperer tout les formations
+	 * @return
+	 */
+	public List<Formation> chercherFormation(Formation pFormation) {
+		List<Formation> listFormation = new ArrayList<Formation>();
+		try {
+
+			String requete = "select * from formation WHERE 1=1 ";
+			if (StringUtils.isNotBlank(pFormation.getEtablissement())) {
+				requete += " AND etablissement= '" + pFormation.getEtablissement() + "' ";
+			}
+			if (StringUtils.isNotBlank(pFormation.getDiplome())) {
+				requete += " AND diplome= '" + pFormation.getDiplome() + "' ";
+			}
+			if (StringUtils.isNotBlank(pFormation.getFiliere())) {
+				requete += " AND filiere= '" + pFormation.getFiliere() + "' ";
+			}
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(requete);
+			while (rs.next()) {
+				Formation formation = new Formation();
+				formation.setId(rs.getInt("id_formation"));
 				formation.setEtablissement(rs.getString("etablissement"));
 				formation.setDiplome(rs.getString("diplome"));
 				formation.setFiliere(rs.getString("filiere"));

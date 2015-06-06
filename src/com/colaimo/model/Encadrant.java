@@ -3,10 +3,38 @@ package com.colaimo.model;
 public class Encadrant {
 
 	Integer id;
-	String nom;
-	String prenom;
+	String nomE;
+	String prenomE;
 	String email;
 	String telephone;
+	/**
+	 * @return the nomE
+	 */
+	public String getNomE() {
+		return nomE;
+	}
+
+	/**
+	 * @param nomE the nomE to set
+	 */
+	public void setNomE(String nomE) {
+		this.nomE = nomE;
+	}
+
+	/**
+	 * @return the prenomE
+	 */
+	public String getPrenomE() {
+		return prenomE;
+	}
+
+	/**
+	 * @param prenomE the prenomE to set
+	 */
+	public void setPrenomE(String prenomE) {
+		this.prenomE = prenomE;
+	}
+
 	String login;
 	String password;
 
@@ -23,36 +51,6 @@ public class Encadrant {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return the nom
-	 */
-	public String getNom() {
-		return nom;
-	}
-
-	/**
-	 * @param nom
-	 *            the nom to set
-	 */
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	/**
-	 * @return the prenom
-	 */
-	public String getPrenom() {
-		return prenom;
-	}
-
-	/**
-	 * @param prenom
-	 *            the prenom to set
-	 */
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
 	}
 
 	/**
@@ -93,5 +91,7 @@ public class Encadrant {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 
 }

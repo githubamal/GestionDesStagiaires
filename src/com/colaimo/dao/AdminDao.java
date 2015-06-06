@@ -107,15 +107,17 @@ public class AdminDao {
 	 * @param serviceId
 	 * @return
 	 */
-	public Admin getAdminById(int adminId) {
-		Admin admin = new Admin();
+	public Admin login(String login, String password) {
+		Admin admin = null;
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("select * from admin where id=?");
-			preparedStatement.setInt(1, adminId);
+					.prepareStatement("select * from admin where login=? and password=?");
+			preparedStatement.setString(1, login);
+			preparedStatement.setString(2, password);
 			ResultSet rs = preparedStatement.executeQuery();
 
 			if (rs.next()) {
+				admin= new Admin();
 				admin.setId(rs.getInt("id"));
 				admin.setLogin(rs.getString("login"));
 				admin.setPassword(rs.getString("password"));

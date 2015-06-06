@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.colaimo.util.DBUtil;
 import com.colaimo.model.Encadrant;
 
@@ -29,8 +31,8 @@ public class EncadrantDao {
 			PreparedStatement preparedStatement = connection
 					.prepareStatement("insert into encadrant(nom_encadrant,prenom_encadrant,email,telephone,login,password) values (?, ?, ?, ?, ?, ? )");
 			// Parameters start with 1
-			preparedStatement.setString(1, encadrant.getNom());
-			preparedStatement.setString(2, encadrant.getPrenom());
+			preparedStatement.setString(1, encadrant.getNomE());
+			preparedStatement.setString(2, encadrant.getPrenomE());
 			preparedStatement.setString(3, encadrant.getEmail());
 			preparedStatement.setString(4, encadrant.getTelephone());
 			preparedStatement.setString(5, encadrant.getLogin());
@@ -71,8 +73,8 @@ public class EncadrantDao {
 					.prepareStatement("update encadrant set nom_encadrant=?, prenom_encadrant=?, email=?, telephone=?, login=?, password=?"
 							+ "where id_encadrant=?");
 			// Parameters start with 1
-			preparedStatement.setString(1, encadrant.getNom());
-			preparedStatement.setString(2, encadrant.getPrenom());
+			preparedStatement.setString(1, encadrant.getNomE());
+			preparedStatement.setString(2, encadrant.getPrenomE());
 			preparedStatement.setString(3, encadrant.getEmail());
 			preparedStatement.setString(4, encadrant.getTelephone());
 			preparedStatement.setString(5, encadrant.getLogin());
@@ -98,8 +100,8 @@ public class EncadrantDao {
 			while (rs.next()) {
 				Encadrant encadrant = new Encadrant();
 				encadrant.setId(rs.getInt("id_encadrant"));
-				encadrant.setNom(rs.getString("nom_encadrant"));
-				encadrant.setPrenom(rs.getString("prenom_encadrant"));
+				encadrant.setNomE(rs.getString("nom_encadrant"));
+				encadrant.setPrenomE(rs.getString("prenom_encadrant"));
 				encadrant.setEmail(rs.getString("email"));
 				encadrant.setTelephone(rs.getString("telephone"));
 				encadrant.setLogin(rs.getString("login"));
@@ -112,6 +114,44 @@ public class EncadrantDao {
 
 		return listEncadrant;
 	}
+	
+	public List<Encadrant> chercherEncadrants(Encadrant pEncadrant) {
+		List<Encadrant> listEncadrant = new ArrayList<Encadrant>();
+		try {
+
+			String requete = "select * from encadrant WHERE 1=1 ";
+			if (StringUtils.isNotBlank(pEncadrant.getNomE())) {
+				requete += " AND nom= '" + pEncadrant.getNomE() + "' ";
+			}
+			if (StringUtils.isNotBlank(pEncadrant.getPrenomE())) {
+				requete += " AND prenom= '" + pEncadrant.getPrenomE() + "' ";
+			}
+			if (StringUtils.isNotBlank(pEncadrant.getTelephone())) {
+				requete += " AND telephone= '" + pEncadrant.getTelephone()
+						+ "' ";
+			}
+			if (StringUtils.isNotBlank(pEncadrant.getEmail())) {
+				requete += " AND email= '" + pEncadrant.getEmail() + "' ";
+			}
+
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(requete);
+			while (rs.next()) {
+				Encadrant encadrant = new Encadrant();
+				encadrant.setId(rs.getInt("id_encadrant"));
+				encadrant.setNomE(rs.getString("nom"));
+				encadrant.setPrenomE(rs.getString("prenom"));
+				encadrant.setTelephone(rs.getString("telephone"));
+				encadrant.setEmail(rs.getString("email"));
+				listEncadrant.add(encadrant);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listEncadrant;
+	}
+	
 
 	/**
 	 * recuperer encadrant par Id
@@ -129,8 +169,8 @@ public class EncadrantDao {
 
 			if (rs.next()) {
 				encadrant.setId(rs.getInt("id_encadrant"));
-				encadrant.setNom(rs.getString("nom_encadrant"));
-				encadrant.setPrenom(rs.getString("prenom_encadrant"));
+				encadrant.setNomE(rs.getString("nom_encadrant"));
+				encadrant.setPrenomE(rs.getString("prenom_encadrant"));
 				encadrant.setEmail(rs.getString("email"));
 				encadrant.setTelephone(rs.getString("telephone"));
 				encadrant.setLogin(rs.getString("login"));
@@ -162,8 +202,8 @@ public class EncadrantDao {
 			if (rs.next()) {
 				encadrant = new Encadrant();
 				encadrant.setId(rs.getInt("id_encadrant"));
-				encadrant.setNom(rs.getString("nom_encadrant"));
-				encadrant.setPrenom(rs.getString("prenom_encadrant"));
+				encadrant.setNomE(rs.getString("nom_encadrant"));
+				encadrant.setPrenomE(rs.getString("prenom_encadrant"));
 				encadrant.setEmail(rs.getString("email"));
 				encadrant.setTelephone(rs.getString("telephone"));
 				encadrant.setLogin(rs.getString("login"));
@@ -199,4 +239,5 @@ public class EncadrantDao {
 
 		return isExist;
 	}
+
 }

@@ -8,10 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.colaimo.model.Theme;
 import com.colaimo.util.DBUtil;
 
 public class ThemeDao {
+	
 	private Connection connection;
 
 	public ThemeDao() {
@@ -84,6 +87,34 @@ public class ThemeDao {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("select * from theme");
+			while (rs.next()) {
+				Theme theme = new Theme();
+				theme.setId(rs.getInt("id_theme"));
+				theme.setTheme(rs.getString("theme"));
+				listTheme.add(theme);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return listTheme;
+	}
+	
+	/**
+	 * recuperer tout les stagiaires
+	 * @return
+	 */
+	public List<Theme> chercherTheme(Theme pTheme) {
+		List<Theme> listTheme = new ArrayList<Theme>();
+		try {
+
+			String requete = "select * from theme WHERE 1=1 ";
+			if (StringUtils.isNotBlank(pTheme.getTheme())) {
+				requete += " AND theme= '" + pTheme.getTheme() + "' ";
+			}
+			
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(requete);
 			while (rs.next()) {
 				Theme theme = new Theme();
 				theme.setId(rs.getInt("id_theme"));
