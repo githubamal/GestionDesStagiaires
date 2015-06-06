@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-default">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/pages/historique/historique.jsp"> <img alt="Brand"
@@ -20,10 +20,12 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="${pageContext.request.contextPath}/app?controller=stagiaireController&action=lister">Stagiaire</a></li>
+				<li  hidden="true"><a href="${pageContext.request.contextPath}/app?controller=stagiaireController&action=lister">Stagiaire						</a></li>
 <%-- 				<li><a href="${pageContext.request.contextPath}/app?controller=stageController&action=lister">Stage</a></li> --%>
-				<li><a href="${pageContext.request.contextPath}/app?controller=themeController&action=lister">Theme</a></li>
+				<li><a href="${pageContext.request.contextPath}/app?controller=themeController&action=lister">Thème</a></li>
 				<li><a href="${pageContext.request.contextPath}/app?controller=formationController&action=lister">Formation</a></li>
+				<li><a href="${pageContext.request.contextPath}/app?controller=encadrantController&action=lister">Encadrant <span class="sr-only">(current)</span></a></li>
+        		<li><a href="${pageContext.request.contextPath}/app?controller=serviceController&action=lister">Service</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
